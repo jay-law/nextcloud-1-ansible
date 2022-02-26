@@ -1,0 +1,23 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  gather_facts: true
+  vars:
+    public_ip: 18.214.121.66   # should match IP in hosts file
+    admin_username: admin
+    admin_password: password1
+
+  tasks:
+    - name: Installing Nextcloud with Snap
+      community.general.snap:
+        name: nextcloud
+      become: yes
+      when: true
+
+    - name: Creating admin user
+      ansible.builtin.command: sudo nextcloud.manual-install {{ admin_username }} {{ admin_password }}
+      when: true
+      
+    - name: Setting trusted_domains
+      ansible.builtin.command: sudo nextcloud.occ config:system:set trusted_domains 1 --value={{ public_ip }}
+      when: true
