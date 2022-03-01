@@ -3,7 +3,7 @@
   remote_user: ubuntu
   gather_facts: true
   vars:
-    public_ip: 18.214.121.66   # should match IP in hosts file
+    public_ip: 54.172.114.94   # should match IP in hosts file
     admin_username: admin
     admin_password: password1
 
